@@ -95,7 +95,7 @@ const tieFighter = new THREE.Group()
 scene.add(tieFighter)
 
 // Cockpit
-const cockpitGeometry = new THREE.SphereGeometry( 0.5, 16, 16 );
+const cockpitGeometry = new THREE.SphereGeometry( 0.5, 8, 8 );
 const cockpitMaterial = new THREE.MeshBasicMaterial( {
   color: 0xffff00,
   wireframe: true
@@ -130,7 +130,7 @@ wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
 tieFighter.add( wing2 );
 
 // Cone wing
-const coneWingGeometry = new THREE.ConeGeometry( 0.3, 0.5, 16 );  // rayon, hauteur, nombre de segments
+const coneWingGeometry = new THREE.ConeGeometry( 0.3, 0.5, 8 );  // rayon, hauteur, nombre de segments
 const coneWingMaterial = new THREE.MeshBasicMaterial({
   color: 0xffff00,
   side: THREE.DoubleSide,
