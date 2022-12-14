@@ -75,7 +75,7 @@ const scene = new THREE.Scene()
 
 // Floor
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(20, 20), // géométrie du plan
+  new THREE.PlaneGeometry(50, 50), // géométrie du plan
   new THREE.MeshBasicMaterial({
     color: '#ff0000',
     side: THREE.DoubleSide
@@ -128,6 +128,34 @@ wing2.rotation.y = - Math.PI * 0.5
 wing2.position.x = -1 // position de l'aile sur l'axe x (largeur)
 wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
 tieFighter.add( wing2 );
+
+// Cone wing
+const coneWingGeometry = new THREE.ConeGeometry( 0.3, 0.5, 16 );  // rayon, hauteur, nombre de segments
+const coneWingMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffff00,
+  side: THREE.DoubleSide,
+  wireframe: true
+});
+const coneWing = new THREE.Mesh( coneWingGeometry, coneWingMaterial );
+// tourner le cone pour que le pointe soit vers la wing
+coneWing.rotation.z = - Math.PI * 0.5
+coneWing.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
+coneWing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+tieFighter.add( coneWing );
+
+// faire un cone non pointu
+const coneWing2Geometry = new THREE.ConeGeometry( 0.3, 0.5, 16 );  // rayon, hauteur, nombre de segments
+const coneWing2Material = new THREE.MeshBasicMaterial({
+  color: 0xffff00,
+  side: THREE.DoubleSide,
+  wireframe: true
+});
+const coneWing2 = new THREE.Mesh( coneWing2Geometry, coneWing2Material );
+// tourner le cone pour que le pointe soit vers la wing
+coneWing2.rotation.z = Math.PI * 0.5
+coneWing2.position.x = -0.75 // position de l'aile sur l'axe x (largeur)
+coneWing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+tieFighter.add( coneWing2 );
 
 
 // Camera
