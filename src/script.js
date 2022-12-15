@@ -76,7 +76,7 @@ const scene = new THREE.Scene()
 // Floor
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(50, 50), // géométrie du plan
-  new THREE.MeshBasicMaterial({
+  new THREE.MeshNormalMaterial({
     color: '#ff0000',
     side: THREE.DoubleSide
   }) // matériau du plan
@@ -129,34 +129,30 @@ wing2.position.x = -1 // position de l'aile sur l'axe x (largeur)
 wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
 tieFighter.add( wing2 );
 
-// Cone wing
-const coneWingGeometry = new THREE.ConeGeometry( 0.3, 0.5, 8 );  // rayon, hauteur, nombre de segments
-const coneWingMaterial = new THREE.MeshBasicMaterial({
+// Cylinder
+const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+const cylinderMaterial = new THREE.MeshBasicMaterial({
   color: 0xffff00,
   side: THREE.DoubleSide,
   wireframe: true
 });
-const coneWing = new THREE.Mesh( coneWingGeometry, coneWingMaterial );
-// tourner le cone pour que le pointe soit vers la wing
-coneWing.rotation.z = - Math.PI * 0.5
-coneWing.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
-coneWing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( coneWing );
+const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
+cylinder.rotation.z = - Math.PI * 0.5
+cylinder.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
+cylinder.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+tieFighter.add( cylinder );
 
-// faire un cone non pointu
-const coneWing2Geometry = new THREE.ConeGeometry( 0.3, 0.5, 16 );  // rayon, hauteur, nombre de segments
-const coneWing2Material = new THREE.MeshBasicMaterial({
+const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+const cylinder2Material = new THREE.MeshBasicMaterial({
   color: 0xffff00,
   side: THREE.DoubleSide,
   wireframe: true
 });
-const coneWing2 = new THREE.Mesh( coneWing2Geometry, coneWing2Material );
-// tourner le cone pour que le pointe soit vers la wing
-coneWing2.rotation.z = Math.PI * 0.5
-coneWing2.position.x = -0.75 // position de l'aile sur l'axe x (largeur)
-coneWing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( coneWing2 );
-
+const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
+cylinder2.rotation.z = Math.PI * 0.5
+cylinder2.position.x = - 0.75 // position de l'aile sur l'axe x (largeur)
+cylinder2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+tieFighter.add( cylinder2 );
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100) // caméra en perspective, avec un champ de vision de 75°, une largeur et une hauteur de la fenêtre du navigateur, une distance minimale de 0.1 et une distance maximale de 100
