@@ -156,15 +156,14 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( cylinder2 );
 
     // Position
-    // faire un cadrillage de 5 x 5 pour placer les tie fighters:
-    // 0 1 2 3 4
-    // 5 6 7 8 9
-    // 10 11 12 13 14
-    // 15 16 17 18 19
-    // 20 21 22 23 24
-    tieFighter.position.x = (i % 5) * 2 // 5 = nombre de tie fighters par ligne
-    tieFighter.position.z = Math.floor(i / 5) // position du tie fighter sur l'axe z (profondeur)
+    // espacer les tie fighters de 5 sur l'axe x et de 5 sur l'axe z
+    tieFighter.position.x = (i % 5) * 5 // 5 = nombre de tie fighters par ligne
+    tieFighter.position.z = Math.floor(i / 5) * 5 // position du tie fighter sur l'axe z (profondeur)
     tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
+
+    // tieFighter.position.x = (i % 5) * 2 // 5 = nombre de tie fighters par ligne
+    // tieFighter.position.z = Math.floor(i / 5) // position du tie fighter sur l'axe z (profondeur)
+    // tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
 
 }
 
