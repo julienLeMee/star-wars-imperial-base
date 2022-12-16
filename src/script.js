@@ -90,69 +90,76 @@ scene.add(floor)
  * Objects
  */
 
-// Tie fighter
-const tieFighter = new THREE.Group()
-scene.add(tieFighter)
+for (let i = 0; i < 20; i++) {
+    // Tie fighter
+    const tieFighter = new THREE.Group()
+    scene.add(tieFighter)
 
-// Cockpit
-const cockpitGeometry = new THREE.SphereGeometry( 0.5, 8, 8 );
-const cockpitMaterial = new THREE.MeshBasicMaterial( {
-  color: 0xffff00,
-  wireframe: true
-});
-const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
-cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
-tieFighter.add( cockpit );
+    // Cockpit
+    const cockpitGeometry = new THREE.SphereGeometry( 0.5, 8, 8 );
+    const cockpitMaterial = new THREE.MeshBasicMaterial( {
+      color: 0xffff00,
+      wireframe: true
+    });
+    const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
+    cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
+    tieFighter.add( cockpit );
 
-// Wings
-const wingGeometry = new THREE.PlaneGeometry( 2, 2);
-const wingMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
-  side: THREE.DoubleSide,
-  wireframe: true
-});
-const wing = new THREE.Mesh( wingGeometry, wingMaterial );
-wing.rotation.y = - Math.PI * 0.5
-wing.position.x = 1 // position de l'aile sur l'axe x (largeur)
-wing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( wing );
+    // Wings
+    const wingGeometry = new THREE.PlaneGeometry( 2, 2);
+    const wingMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      side: THREE.DoubleSide,
+      wireframe: true
+    });
+    const wing = new THREE.Mesh( wingGeometry, wingMaterial );
+    wing.rotation.y = - Math.PI * 0.5
+    wing.position.x = 1 // position de l'aile sur l'axe x (largeur)
+    wing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+    tieFighter.add( wing );
 
-const wing2Geometry = new THREE.PlaneGeometry( 2, 2 );
-const wing2Material = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
-  side: THREE.DoubleSide,
-  wireframe: true
-});
-const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
-wing2.rotation.y = - Math.PI * 0.5
-wing2.position.x = -1 // position de l'aile sur l'axe x (largeur)
-wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( wing2 );
+    const wing2Geometry = new THREE.PlaneGeometry( 2, 2 );
+    const wing2Material = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      side: THREE.DoubleSide,
+      wireframe: true
+    });
+    const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
+    wing2.rotation.y = - Math.PI * 0.5
+    wing2.position.x = -1 // position de l'aile sur l'axe x (largeur)
+    wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+    tieFighter.add( wing2 );
 
-// Cylinder
-const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-const cylinderMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
-  side: THREE.DoubleSide,
-  wireframe: true
-});
-const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
-cylinder.rotation.z = - Math.PI * 0.5
-cylinder.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
-cylinder.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( cylinder );
+    // Cylinder
+    const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+    const cylinderMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      side: THREE.DoubleSide,
+      wireframe: true
+    });
+    const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
+    cylinder.rotation.z = - Math.PI * 0.5
+    cylinder.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
+    cylinder.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+    tieFighter.add( cylinder );
 
-const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-const cylinder2Material = new THREE.MeshBasicMaterial({
-  color: 0xffff00,
-  side: THREE.DoubleSide,
-  wireframe: true
-});
-const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
-cylinder2.rotation.z = Math.PI * 0.5
-cylinder2.position.x = - 0.75 // position de l'aile sur l'axe x (largeur)
-cylinder2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
-tieFighter.add( cylinder2 );
+    const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+    const cylinder2Material = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      side: THREE.DoubleSide,
+      wireframe: true
+    });
+    const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
+    cylinder2.rotation.z = Math.PI * 0.5
+    cylinder2.position.x = - 0.75 // position de l'aile sur l'axe x (largeur)
+    cylinder2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
+    tieFighter.add( cylinder2 );
+
+    // Position
+    tieFighter.position.x = (Math.random() - 0.5) * 10
+    tieFighter.position.z = (Math.random() - 0.5) * 10
+
+}
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100) // caméra en perspective, avec un champ de vision de 75°, une largeur et une hauteur de la fenêtre du navigateur, une distance minimale de 0.1 et une distance maximale de 100
