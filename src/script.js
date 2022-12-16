@@ -90,7 +90,7 @@ scene.add(floor)
  * Objects
  */
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
     // Tie fighter
     const tieFighter = new THREE.Group()
     scene.add(tieFighter)
@@ -156,16 +156,23 @@ for (let i = 0; i < 20; i++) {
     tieFighter.add( cylinder2 );
 
     // Position
-    tieFighter.position.x = (Math.random() - 0.5) * 10
-    tieFighter.position.z = (Math.random() - 0.5) * 10
+    // faire un cadrillage de 5 x 5 pour placer les tie fighters:
+    // 0 1 2 3 4
+    // 5 6 7 8 9
+    // 10 11 12 13 14
+    // 15 16 17 18 19
+    // 20 21 22 23 24
+    tieFighter.position.x = (i % 5) * 2 // 5 = nombre de tie fighters par ligne
+    tieFighter.position.z = Math.floor(i / 5) // position du tie fighter sur l'axe z (profondeur)
+    tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
 
 }
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100) // caméra en perspective, avec un champ de vision de 75°, une largeur et une hauteur de la fenêtre du navigateur, une distance minimale de 0.1 et une distance maximale de 100
 camera.position.x = 4 // position de la caméra sur l'axe x
-camera.position.y = 2 // position de la caméra sur l'axe y
-camera.position.z = 5 // position de la caméra sur l'axe z
+camera.position.y = 4 // position de la caméra sur l'axe y
+camera.position.z = 10 // position de la caméra sur l'axe z
 scene.add(camera)
 
 // Controls
