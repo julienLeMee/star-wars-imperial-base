@@ -73,11 +73,22 @@ window.addEventListener('dblclick', () =>
 // Scene
 const scene = new THREE.Scene()
 
+// Textures
+const textureLoader = new THREE.TextureLoader()
+const matCapTexture1 = textureLoader.load('/textures/matcaps/1.png')
+const matCapTexture2 = textureLoader.load('/textures/matcaps/2.png')
+const matCapTexture3 = textureLoader.load('/textures/matcaps/3.png')
+const matCapTexture4 = textureLoader.load('/textures/matcaps/4.png')
+const matCapTexture5 = textureLoader.load('/textures/matcaps/5.png')
+const matCapTexture6 = textureLoader.load('/textures/matcaps/6.png')
+const matCapTexture7 = textureLoader.load('/textures/matcaps/7.png')
+const matCapTexture8 = textureLoader.load('/textures/matcaps/8.png')
+
 // Floor
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(50, 50), // géométrie du plan
-  new THREE.MeshNormalMaterial({
-    color: '#ff0000',
+  new THREE.MeshMatcapMaterial({
+    matcap: matCapTexture3,
     side: THREE.DoubleSide
   }) // matériau du plan
 )
@@ -97,33 +108,28 @@ for (let i = 0; i < 25; i++) {
 
     // Cockpit
     const cockpitGeometry = new THREE.SphereGeometry( 0.5, 8, 8 );
-    const cockpitMaterial = new THREE.MeshBasicMaterial( {
-      color: 0xffff00,
-      wireframe: true
-    });
+    const cockpitMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
     cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
     tieFighter.add( cockpit );
 
     // Wings
-    const wingGeometry = new THREE.PlaneGeometry( 2, 2);
-    const wingMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
-      side: THREE.DoubleSide,
-      wireframe: true
-    });
+    const wingGeometry = new THREE.PlaneGeometry( 2, 2.5 );
+    const wingMaterial = new THREE.MeshMatcapMaterial({
+      matcap: matCapTexture8,
+      side: THREE.DoubleSide
+    })
     const wing = new THREE.Mesh( wingGeometry, wingMaterial );
     wing.rotation.y = - Math.PI * 0.5
     wing.position.x = 1 // position de l'aile sur l'axe x (largeur)
     wing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( wing );
 
-    const wing2Geometry = new THREE.PlaneGeometry( 2, 2 );
-    const wing2Material = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
-      side: THREE.DoubleSide,
-      wireframe: true
-    });
+    const wing2Geometry = new THREE.PlaneGeometry( 2, 2.5 ); // (largeur, hauteur)
+    const wing2Material = new THREE.MeshMatcapMaterial({
+      matcap: matCapTexture8,
+      side: THREE.DoubleSide
+    })
     const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
     wing2.rotation.y = - Math.PI * 0.5
     wing2.position.x = -1 // position de l'aile sur l'axe x (largeur)
@@ -132,11 +138,7 @@ for (let i = 0; i < 25; i++) {
 
     // Cylinder
     const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinderMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
-      side: THREE.DoubleSide,
-      wireframe: true
-    });
+    const cylinderMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
     cylinder.rotation.z = - Math.PI * 0.5
     cylinder.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
@@ -144,11 +146,7 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( cylinder );
 
     const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinder2Material = new THREE.MeshBasicMaterial({
-      color: 0xffff00,
-      side: THREE.DoubleSide,
-      wireframe: true
-    });
+    const cylinder2Material = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
     cylinder2.rotation.z = Math.PI * 0.5
     cylinder2.position.x = - 0.75 // position de l'aile sur l'axe x (largeur)
@@ -156,22 +154,18 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( cylinder2 );
 
     // Position
-    // espacer les tie fighters de 5 sur l'axe x et de 5 sur l'axe z
-    tieFighter.position.x = (i % 5) * 5 // 5 = nombre de tie fighters par ligne
-    tieFighter.position.z = Math.floor(i / 5) * 5 // position du tie fighter sur l'axe z (profondeur)
+    // espacer les tie fighters de 5 sur l'axe x et de 5 sur l'axe z et centrer la grille
+    tieFighter.position.x = (i % 5) * 5 - 10 // 5 = nombre de tie fighters par ligne - 10 = centrer la grille
+    tieFighter.position.z = Math.floor(i / 5) * 5 - 10 // position du tie fighter sur l'axe z (profondeur) - 10 = centrer la grille
     tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
-
-    // tieFighter.position.x = (i % 5) * 2 // 5 = nombre de tie fighters par ligne
-    // tieFighter.position.z = Math.floor(i / 5) // position du tie fighter sur l'axe z (profondeur)
-    // tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
 
 }
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100) // caméra en perspective, avec un champ de vision de 75°, une largeur et une hauteur de la fenêtre du navigateur, une distance minimale de 0.1 et une distance maximale de 100
-camera.position.x = 4 // position de la caméra sur l'axe x
-camera.position.y = 4 // position de la caméra sur l'axe y
-camera.position.z = 10 // position de la caméra sur l'axe z
+camera.position.x = 3 // position de la caméra sur l'axe x
+camera.position.y = 10 // position de la caméra sur l'axe y
+camera.position.z = 18 // position de la caméra sur l'axe z
 scene.add(camera)
 
 // Controls
