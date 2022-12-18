@@ -259,6 +259,11 @@ scene.add(camera)
 
 // Debug
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient Light')
+gui.add(pointLight, 'intensity').min(0).max(1).step(0.001).name('Point Light')
+gui.add(pointLight2, 'intensity').min(0).max(1).step(0.001).name('Point Light 2')
+gui.add(pointLight3, 'intensity').min(0).max(1).step(0.001).name('Point Light 3')
+gui.add(pointLight4, 'intensity').min(0).max(1).step(0.001).name('Point Light 4')
+gui.add(pointLight5, 'intensity').min(0).max(1).step(0.001).name('Point Light 5')
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
