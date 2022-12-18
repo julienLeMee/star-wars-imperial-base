@@ -107,7 +107,7 @@ for (let i = 0; i < 25; i++) {
     scene.add(tieFighter)
 
     // Cockpit
-    const cockpitGeometry = new THREE.SphereGeometry( 0.5, 8, 8 );
+    const cockpitGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
     const cockpitMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
     cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
@@ -137,19 +137,19 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing2 );
 
     // Cylinder
-    const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+    const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
     const cylinderMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
     cylinder.rotation.z = - Math.PI * 0.5
-    cylinder.position.x = 0.75 // position de l'aile sur l'axe x (largeur)
+    cylinder.position.x = 0.7 // position de l'aile sur l'axe x (largeur)
     cylinder.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( cylinder );
 
-    const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.5, 8 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+    const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
     const cylinder2Material = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
     const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
     cylinder2.rotation.z = Math.PI * 0.5
-    cylinder2.position.x = - 0.75 // position de l'aile sur l'axe x (largeur)
+    cylinder2.position.x = - 0.7 // position de l'aile sur l'axe x (largeur)
     cylinder2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( cylinder2 );
 
