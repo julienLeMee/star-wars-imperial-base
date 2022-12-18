@@ -1,6 +1,10 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'lil-gui'
+
+// Debug
+const gui = new dat.GUI({ width: 340 })
 
 /**
  * Base
@@ -87,13 +91,16 @@ const matCapTexture8 = textureLoader.load('/textures/matcaps/8.png')
 // Floor
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(50, 50), // géométrie du plan
-  new THREE.MeshMatcapMaterial({
-    matcap: matCapTexture3,
-    side: THREE.DoubleSide
-  }) // matériau du plan
+  new THREE.MeshStandardMaterial({
+    side: THREE.DoubleSide,
+    roughness: 0.5,
+  })
 )
 floor.rotation.x = - Math.PI * 0.5 // rotation du plan, pour qu'il soit horizontal
 floor.position.y = 0 // position du plan sur l'axe y (hauteur)
+
+floor.receiveShadow = true
+
 scene.add(floor)
 
 
@@ -108,15 +115,22 @@ for (let i = 0; i < 25; i++) {
 
     // Cockpit
     const cockpitGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
-    const cockpitMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
+    const cockpitMaterial = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      roughness: 0.5,
+      metalness: 0.5,
+      side: THREE.DoubleSide
+    })
     const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
     cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
     tieFighter.add( cockpit );
 
     // Wings
     const wingGeometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wingMaterial = new THREE.MeshMatcapMaterial({
-      matcap: matCapTexture8,
+    const wingMaterial = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      roughness: 0.5,
+      metalness: 0.5,
       side: THREE.DoubleSide
     })
     const wing = new THREE.Mesh( wingGeometry, wingMaterial );
@@ -126,8 +140,10 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing );
 
     const wing2Geometry = new THREE.PlaneGeometry( 2, 2.5 ); // (largeur, hauteur)
-    const wing2Material = new THREE.MeshMatcapMaterial({
-      matcap: matCapTexture8,
+    const wing2Material = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      roughness: 0.5,
+      metalness: 0.5,
       side: THREE.DoubleSide
     })
     const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
@@ -138,7 +154,12 @@ for (let i = 0; i < 25; i++) {
 
     // Cylinder
     const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinderMaterial = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
+    const cylinderMaterial = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      roughness: 0.5,
+      metalness: 0.5,
+      side: THREE.DoubleSide
+    })
     const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
     cylinder.rotation.z = - Math.PI * 0.5
     cylinder.position.x = 0.7 // position de l'aile sur l'axe x (largeur)
@@ -146,7 +167,12 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( cylinder );
 
     const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinder2Material = new THREE.MeshMatcapMaterial({ matcap: matCapTexture8 })
+    const cylinder2Material = new THREE.MeshStandardMaterial({
+      color: 0x000000,
+      roughness: 0.5,
+      metalness: 0.5,
+      side: THREE.DoubleSide
+    })
     const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
     cylinder2.rotation.z = Math.PI * 0.5
     cylinder2.position.x = - 0.7 // position de l'aile sur l'axe x (largeur)
@@ -159,7 +185,70 @@ for (let i = 0; i < 25; i++) {
     tieFighter.position.z = Math.floor(i / 5) * 5 - 10 // position du tie fighter sur l'axe z (profondeur) - 10 = centrer la grille
     tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
 
+    // Shadow
+    cockpit.castShadow = true
+    wing.castShadow = true
+    wing2.castShadow = true
+    cylinder.castShadow = true
+    cylinder2.castShadow = true
+
 }
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3) // lumière ambiante, couleur blanche, intensité de 0.5
+scene.add(ambientLight)
+
+const pointLight = new THREE.PointLight(0xff9000, 0.2)
+pointLight.position.set(0, 25, 1) // position de la lumière directionnelle sur l'axe x, y et z
+pointLight.castShadow = true
+pointLight.shadow.camera.near = 0.1 // distance minimale de la caméra
+pointLight.shadow.camera.far = 35 // distance maximale de la caméra
+pointLight.shadow.mapSize.width = 1024 // taille de la carte d'ombre
+pointLight.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+scene.add(pointLight)
+
+const pointLight2 = new THREE.PointLight(0xff9000, 1)
+pointLight2.position.set(0, 1, -20) // position de la lumière directionnelle sur l'axe x, y et z
+pointLight2.castShadow = true
+pointLight2.shadow.camera.near = 0.1 // distance minimale de la caméra
+pointLight2.shadow.camera.far = 35 // distance maximale de la caméra
+pointLight2.shadow.mapSize.width = 1024 // taille de la carte d'ombre
+pointLight2.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+scene.add(pointLight2)
+
+const pointLight3 = new THREE.PointLight(0xff9000, 1)
+pointLight3.position.set(0, 1, 20) // position de la lumière directionnelle sur l'axe x, y et z
+pointLight3.castShadow = true
+pointLight3.shadow.camera.near = 0.1 // distance minimale de la caméra
+pointLight3.shadow.camera.far = 35 // distance maximale de la caméra
+pointLight3.shadow.mapSize.width = 1024 // taille de la carte d'ombre
+pointLight3.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+scene.add(pointLight3)
+
+const pointLight4 = new THREE.PointLight(0xff9000, 1)
+pointLight4.position.set(20, 1, 0) // position de la lumière directionnelle sur l'axe x, y et z
+pointLight4.castShadow = true
+pointLight4.shadow.camera.near = 0.1 // distance minimale de la caméra
+pointLight4.shadow.camera.far = 35 // distance maximale de la caméra
+pointLight4.shadow.mapSize.width = 1024 // taille de la carte d'ombre
+pointLight4.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+scene.add(pointLight4)
+
+const pointLight5 = new THREE.PointLight(0xff9000, 1)
+pointLight5.position.set(-20, 1, 0) // position de la lumière directionnelle sur l'axe x, y et z
+pointLight5.castShadow = true
+pointLight5.shadow.camera.near = 0.1 // distance minimale de la caméra
+pointLight5.shadow.camera.far = 35 // distance maximale de la caméra
+pointLight5.shadow.mapSize.width = 1024 // taille de la carte d'ombre
+pointLight5.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+scene.add(pointLight5)
+
+// Helpers
+// const pointLightCameraHelper = new THREE.CameraHelper(pointLight.shadow.camera)
+// scene.add(pointLightCameraHelper)
+
+// const pointLightCameraHelper2 = new THREE.CameraHelper(pointLight2.shadow.camera)
+// scene.add(pointLightCameraHelper2)
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100) // caméra en perspective, avec un champ de vision de 75°, une largeur et une hauteur de la fenêtre du navigateur, une distance minimale de 0.1 et une distance maximale de 100
@@ -167,6 +256,9 @@ camera.position.x = 3 // position de la caméra sur l'axe x
 camera.position.y = 10 // position de la caméra sur l'axe y
 camera.position.z = 18 // position de la caméra sur l'axe z
 scene.add(camera)
+
+// Debug
+gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001).name('Ambient Light')
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
@@ -178,6 +270,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 })
 renderer.setSize(sizes.width, sizes.height)
+renderer.shadowMap.enabled = true
 
 // Animate
 const clock = new THREE.Clock()
