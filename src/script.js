@@ -275,6 +275,33 @@ for (let i = 0; i < 25; i++) {
     cylinder2.castShadow = true
 }
 
+/**
+ * Particles
+ */
+// Geometry
+const particlesGeometry = new THREE.BufferGeometry()
+const count = 100000
+
+const positions = new Float32Array(count * 3)
+
+for (let i = 0; i < count * 3; i++)
+{
+    positions[i] = ((Math.random() - 0.5) * 10) * 100
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+// Material
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.2,
+    sizeAttenuation: true
+})
+
+// Points
+const bubbles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(bubbles)
+
+
 // Lights
 const ambientLight = new THREE.AmbientLight( 0xff9000, 0.3 ) // lumière ambiante, couleur, intensité de 0.5
 scene.add(ambientLight)
