@@ -224,7 +224,7 @@ for (let i = 0; i < 25; i++) {
     })
     const wing = new THREE.Mesh( wingGeometry, wingMaterial );
     wing.rotation.y = - Math.PI * 0.5
-    wing.position.x = 1.02 // position de l'aile sur l'axe x (largeur)
+    wing.position.x = 1.04 // position de l'aile sur l'axe x (largeur)
     wing.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( wing );
 
@@ -277,7 +277,7 @@ for (let i = 0; i < 25; i++) {
     })
     const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
     wing2.rotation.y = - Math.PI * 0.5
-    wing2.position.x = -0.9 // position de l'aile sur l'axe x (largeur)
+    wing2.position.x = - 0.95 // position de l'aile sur l'axe x (largeur)
     wing2.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( wing2 );
 
