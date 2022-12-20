@@ -525,6 +525,7 @@ pointLight.shadow.camera.near = 0.1 // distance minimale de la caméra
 pointLight.shadow.camera.far = 35 // distance maximale de la caméra
 pointLight.shadow.mapSize.width = 1024 // taille de la carte d'ombre
 pointLight.shadow.mapSize.height = 1024 // taille de la carte d'ombre
+pointLight.shadow.radius = 2 // taille de la carte d'ombre
 scene.add(pointLight)
 
 const UpsidePointLight = new THREE.PointLight( 0xff9000, 1 )
