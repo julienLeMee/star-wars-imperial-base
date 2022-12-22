@@ -156,8 +156,145 @@ scene.add(floor)
 
 
 /**
- * Objects
+ * Tie fighter
  */
+
+// Cockpit
+const cockpitGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
+const cockpitMaterial = new THREE.MeshStandardMaterial({
+  map: metalColorTexture,
+  transparent: true,
+  aoMap: metalAmbientOcclusionTexture,
+  displacementMap: metalHeightTexture,
+  displacementScale: 0.1,
+  normalMap: metalNormalTexture,
+  metalnessMap: metalMetallicTexture,
+  roughnessMap: metalRoughnessTexture,
+  side: THREE.DoubleSide
+})
+
+// glass
+const glassGeometry = new THREE.ConeGeometry( 0.3, 0.1, 8 ); // (rayon, hauteur, nombre de segments)
+const glassMaterial = new THREE.MeshStandardMaterial({
+  color: 0x000000,
+  transparent: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  side: THREE.DoubleSide
+})
+
+// glass structure
+const glassStructureGeometry = new THREE.ConeGeometry( 0.3, 0.1, 8 ); // (rayon, hauteur, nombre de segments)
+const glassStructureMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  transparent: true,
+  wireframe: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  side: THREE.DoubleSide
+})
+
+// Wings
+const wingGeometry = new THREE.PlaneGeometry( 2, 2.5 );
+const wingMaterial = new THREE.MeshStandardMaterial({
+  map: surfaceGrungeColorTexture,
+  transparent: true,
+  aoMap: surfaceGrungeAmbientOcclusionTexture,
+  displacementMap: surfaceGrungeHeightTexture,
+  displacementScale: 0.1,
+  normalMap: surfaceGrungeNormalTexture,
+  roughnessMap: surfaceGrungeRoughnessTexture,
+  side: THREE.DoubleSide
+})
+
+// Wings structure
+const wingStructureGeometry = new THREE.PlaneGeometry( 2, 2.5 );
+const wingStructureMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  transparent: true,
+  wireframe: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  opacity: 0.5,
+  side: THREE.DoubleSide
+})
+
+// Wings structure 2
+const wingStructure2Geometry = new THREE.PlaneGeometry( 2, 2.5 );
+const wingStructure2Material = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  transparent: true,
+  wireframe: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  opacity: 0.5,
+  side: THREE.DoubleSide
+})
+
+// Wings 2
+const wing2Geometry = new THREE.PlaneGeometry( 2, 2.5 ); // (largeur, hauteur)
+const wing2Material = new THREE.MeshStandardMaterial({
+  map: surfaceGrungeColorTexture,
+  transparent: true,
+  aoMap: surfaceGrungeAmbientOcclusionTexture,
+  displacementMap: surfaceGrungeHeightTexture,
+  displacementScale: 0.1,
+  normalMap: surfaceGrungeNormalTexture,
+  roughnessMap: surfaceGrungeRoughnessTexture,
+  side: THREE.DoubleSide
+})
+
+// Wings2 structure
+const wing2StructureGeometry = new THREE.PlaneGeometry( 2, 2.5 );
+const wing2StructureMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  transparent: true,
+  wireframe: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  opacity: 0.5,
+  side: THREE.DoubleSide
+})
+
+// Wings2 structure 2
+const wing2Structure2Geometry = new THREE.PlaneGeometry( 2, 2.5 );
+const wing2Structure2Material = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  transparent: true,
+  wireframe: true,
+  roughness: 0.1,
+  metalness: 0.1,
+  opacity: 0.5,
+  side: THREE.DoubleSide
+})
+
+// Cylinder
+const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+const cylinderMaterial = new THREE.MeshStandardMaterial({
+  map: metalColorTexture,
+  transparent: true,
+  aoMap: metalAmbientOcclusionTexture,
+  displacementMap: metalHeightTexture,
+  displacementScale: 0.1,
+  normalMap: metalNormalTexture,
+  metalnessMap: metalMetallicTexture,
+  roughnessMap: metalRoughnessTexture,
+  side: THREE.DoubleSide
+})
+
+// Cylinder 2
+const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
+const cylinder2Material = new THREE.MeshStandardMaterial({
+  map: metalColorTexture,
+  transparent: true,
+  aoMap: metalAmbientOcclusionTexture,
+  displacementMap: metalHeightTexture,
+  displacementScale: 0.1,
+  normalMap: metalNormalTexture,
+  metalnessMap: metalMetallicTexture,
+  roughnessMap: metalRoughnessTexture,
+  side: THREE.DoubleSide
+})
 
 for (let i = 0; i < 25; i++) {
     // Tie fighter
@@ -165,31 +302,11 @@ for (let i = 0; i < 25; i++) {
     scene.add(tieFighter)
 
     // Cockpit
-    const cockpitGeometry = new THREE.SphereGeometry( 0.5, 32, 32 );
-    const cockpitMaterial = new THREE.MeshStandardMaterial({
-      map: metalColorTexture,
-      transparent: true,
-      aoMap: metalAmbientOcclusionTexture,
-      displacementMap: metalHeightTexture,
-      displacementScale: 0.1,
-      normalMap: metalNormalTexture,
-      metalnessMap: metalMetallicTexture,
-      roughnessMap: metalRoughnessTexture,
-      side: THREE.DoubleSide
-    })
     const cockpit = new THREE.Mesh( cockpitGeometry, cockpitMaterial );
     cockpit.position.y = 2 // position du cockpit sur l'axe y (hauteur)
     tieFighter.add( cockpit );
 
     // glass
-    const glassGeometry = new THREE.ConeGeometry( 0.3, 0.1, 8 ); // (rayon, hauteur, nombre de segments)
-    const glassMaterial = new THREE.MeshStandardMaterial({
-      color: 0x000000,
-      transparent: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      side: THREE.DoubleSide
-    })
     const glass = new THREE.Mesh( glassGeometry, glassMaterial );
     glass.position.y = 2 // position du cockpit sur l'axe y (hauteur)
     glass.position.z = 0.535 // position du cockpit sur l'axe z (profondeur)
@@ -197,15 +314,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( glass );
 
     // glass structure
-    const glassStructureGeometry = new THREE.ConeGeometry( 0.3, 0.1, 8 ); // (rayon, hauteur, nombre de segments)
-    const glassStructureMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      transparent: true,
-      wireframe: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      side: THREE.DoubleSide
-    })
     const glassStructure = new THREE.Mesh( glassStructureGeometry, glassStructureMaterial );
     glassStructure.position.y = 2 // position du cockpit sur l'axe y (hauteur)
     glassStructure.position.z = 0.535 // position du cockpit sur l'axe z (profondeur)
@@ -213,17 +321,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( glassStructure );
 
     // Wings
-    const wingGeometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wingMaterial = new THREE.MeshStandardMaterial({
-      map: surfaceGrungeColorTexture,
-      transparent: true,
-      aoMap: surfaceGrungeAmbientOcclusionTexture,
-      displacementMap: surfaceGrungeHeightTexture,
-      displacementScale: 0.1,
-      normalMap: surfaceGrungeNormalTexture,
-      roughnessMap: surfaceGrungeRoughnessTexture,
-      side: THREE.DoubleSide
-    })
     const wing = new THREE.Mesh( wingGeometry, wingMaterial );
     wing.rotation.y = - Math.PI * 0.5
     wing.position.x = 1.04 // position de l'aile sur l'axe x (largeur)
@@ -231,16 +328,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing );
 
     // Wings structure
-    const wingStructureGeometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wingStructureMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      transparent: true,
-      wireframe: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      opacity: 0.5,
-      side: THREE.DoubleSide
-    })
     const wingStructure = new THREE.Mesh( wingStructureGeometry, wingStructureMaterial );
     wingStructure.rotation.y = - Math.PI * 0.5
     wingStructure.position.x = 1 // position de l'aile sur l'axe x (largeur)
@@ -248,16 +335,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wingStructure );
 
     // Wings structure 2
-    const wingStructure2Geometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wingStructure2Material = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      transparent: true,
-      wireframe: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      opacity: 0.5,
-      side: THREE.DoubleSide
-    })
     const wingStructure2 = new THREE.Mesh( wingStructure2Geometry, wingStructure2Material );
     wingStructure2.rotation.y = Math.PI * 0.5
     wingStructure2.position.x = 1 // position de l'aile sur l'axe x (largeur)
@@ -265,18 +342,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wingStructure2 );
 
     // Wings 2
-
-    const wing2Geometry = new THREE.PlaneGeometry( 2, 2.5 ); // (largeur, hauteur)
-    const wing2Material = new THREE.MeshStandardMaterial({
-      map: surfaceGrungeColorTexture,
-      transparent: true,
-      aoMap: surfaceGrungeAmbientOcclusionTexture,
-      displacementMap: surfaceGrungeHeightTexture,
-      displacementScale: 0.1,
-      normalMap: surfaceGrungeNormalTexture,
-      roughnessMap: surfaceGrungeRoughnessTexture,
-      side: THREE.DoubleSide
-    })
     const wing2 = new THREE.Mesh( wing2Geometry, wing2Material );
     wing2.rotation.y = - Math.PI * 0.5
     wing2.position.x = - 0.95 // position de l'aile sur l'axe x (largeur)
@@ -284,16 +349,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing2 );
 
     // Wings2 structure
-    const wing2StructureGeometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wing2StructureMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      transparent: true,
-      wireframe: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      opacity: 0.5,
-      side: THREE.DoubleSide
-    })
     const wing2Structure = new THREE.Mesh( wing2StructureGeometry, wing2StructureMaterial );
     wing2Structure.rotation.y = - Math.PI * 0.5
     wing2Structure.position.x = -1 // position de l'aile sur l'axe x (largeur)
@@ -301,16 +356,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing2Structure );
 
     // Wings2 structure 2
-    const wing2Structure2Geometry = new THREE.PlaneGeometry( 2, 2.5 );
-    const wing2Structure2Material = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      transparent: true,
-      wireframe: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      opacity: 0.5,
-      side: THREE.DoubleSide
-    })
     const wing2Structure2 = new THREE.Mesh( wing2Structure2Geometry, wing2Structure2Material );
     wing2Structure2.rotation.y = Math.PI * 0.5
     wing2Structure2.position.x = -1 // position de l'aile sur l'axe x (largeur)
@@ -318,36 +363,13 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( wing2Structure2 );
 
     // Cylinder
-    const cylinderGeometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinderMaterial = new THREE.MeshStandardMaterial({
-      map: metalColorTexture,
-      transparent: true,
-      aoMap: metalAmbientOcclusionTexture,
-      displacementMap: metalHeightTexture,
-      displacementScale: 0.1,
-      normalMap: metalNormalTexture,
-      metalnessMap: metalMetallicTexture,
-      roughnessMap: metalRoughnessTexture,
-      side: THREE.DoubleSide
-    })
     const cylinder = new THREE.Mesh( cylinderGeometry, cylinderMaterial );
     cylinder.rotation.z = - Math.PI * 0.5
     cylinder.position.x = 0.7 // position de l'aile sur l'axe x (largeur)
     cylinder.position.y = 2 // position de l'aile sur l'axe y (hauteur)
     tieFighter.add( cylinder );
 
-    const cylinder2Geometry = new THREE.CylinderGeometry( 0.1, 0.2, 0.6, 32 ); // géométrie du cylindre (rayon du haut, rayon du bas, hauteur, nombre de segments)
-    const cylinder2Material = new THREE.MeshStandardMaterial({
-      map: metalColorTexture,
-      transparent: true,
-      aoMap: metalAmbientOcclusionTexture,
-      displacementMap: metalHeightTexture,
-      displacementScale: 0.1,
-      normalMap: metalNormalTexture,
-      metalnessMap: metalMetallicTexture,
-      roughnessMap: metalRoughnessTexture,
-      side: THREE.DoubleSide
-    })
+    // Cylinder 2
     const cylinder2 = new THREE.Mesh( cylinder2Geometry, cylinder2Material );
     cylinder2.rotation.z = Math.PI * 0.5
     cylinder2.position.x = - 0.7 // position de l'aile sur l'axe x (largeur)
@@ -355,7 +377,6 @@ for (let i = 0; i < 25; i++) {
     tieFighter.add( cylinder2 );
 
     // Position
-    // espacer les tie fighters de 5 sur l'axe x et de 5 sur l'axe z et centrer la grille
     tieFighter.position.x = (i % 5) * 5 - 10 // 5 = nombre de tie fighters par ligne - 10 = centrer la grille
     tieFighter.position.z = Math.floor(i / 5) * 5 - 10 // position du tie fighter sur l'axe z (profondeur) - 10 = centrer la grille
     tieFighter.position.y = 1 // position du tie fighter sur l'axe y (hauteur)
@@ -409,7 +430,6 @@ torch4.position.z = -24.9 // position de l'aile sur l'axe y (hauteur)
 torch.add( torch4 );
 
 // head torch
-// ajouter un Octahedron pour faire une tête de torche
 const headTorchGeometry = new THREE.OctahedronGeometry( 0.2, 0 ); // rayon, nombre de segments
 const headTorchMaterial = new THREE.MeshStandardMaterial({
   color: 0xff0000,
