@@ -6,6 +6,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 // // Debug
 // const gui = new dat.GUI({ width: 340 })
 
+// Loader
+window.addEventListener('load', function() {
+  var loaderContainer = document.getElementById('loader-container');
+  loaderContainer.style.display = 'none';
+});
+
 /**
  * Base
  */
